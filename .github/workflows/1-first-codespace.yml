@@ -6,17 +6,21 @@ on:
 jobs:
   on_add_dependency:
     name: On Add dependency
-    if: >-
+    if: >
       ${{ !github.event.repository.is_template }}
 
     runs-on: ubuntu-latest
 
-    env: # Add your environment variables here
-      FILE: "index.html"
+    permissions:
+      contents: write
+      pull-requests: write
+
+    env:
+      FILE: index.html
       SEARCH: "Hello from the codespace"
-      FROM_STEP: "1"
-      TO_STEP: "2"
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Ensure this is set in your repository secrets
+      FROM_STEP: 1
+      TO_STEP: 2
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout
